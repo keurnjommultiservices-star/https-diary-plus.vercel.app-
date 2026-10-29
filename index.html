@@ -6,19 +6,172 @@
   <title>Le programme Diary+ · Amicale des Femmes de la DGID</title>
   <meta name="description" content="Le programme Diary+ porté par Mme Camara Diariatou Aidara pour la présidence de l’Amicale des Femmes de la DGID : leadership, solidarité, digitalisation, cohésion, partenariats et bonne gouvernance.">
   <meta name="theme-color" content="#2a3181">
-  <link rel="canonical" href="https://diary-plus-nu.vercel.app/">
+  <link rel="canonical" href="https://diary-plus.netlify.app/">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://diary-plus.netlify.app/">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:title" content="Le programme Diary+ · Amicale des Femmes de la DGID">
   <meta property="og:description" content="Une nouvelle dynamique collective pour l’AFDGID. Découvrez les 6 engagements du programme Diary+.">
-  <meta property="og:image" content="/assets/img/og-image.jpg">
+  <meta property="og:image" content="https://diary-plus.netlify.app/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+:root {
+  --accent: #2a3181;
+  --accent-dark: #1f2562;
+  --accent-soft: #eef0f8;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg: #f5f6f8;
+  --white: #ffffff;
+  --radius: 6px;
+  --maxw: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.narrow { max-width: 760px; }
+
+/* En-tête */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 700; font-size: 1.3rem; color: var(--accent); text-decoration: none; letter-spacing: -.01em; }
+.topbar nav { display: flex; align-items: center; gap: 28px; }
+.topbar nav a { text-decoration: none; font-weight: 500; font-size: .92rem; color: var(--ink); }
+.topbar nav a:hover { color: var(--accent); }
+.topbar nav a.btn { color: #fff; }
+
+/* Boutons */
+.btn {
+  display: inline-block; padding: 12px 24px; border-radius: 4px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-weight: 600; font-size: .95rem; border: 1px solid var(--accent);
+  transition: background .15s ease, border-color .15s ease;
+}
+.btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-small { padding: 8px 16px; font-size: .88rem; }
+.btn-light { background: #fff; color: var(--accent); border-color: #fff; }
+.btn-light:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+.btn-outline { background: transparent; color: var(--accent); border-color: var(--accent); }
+.btn-outline:hover { background: var(--accent-soft); }
+
+/* Héros — fond clair, texte sombre */
+.hero { background: var(--bg); color: var(--ink); padding: 72px 0; border-bottom: 1px solid var(--line); }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: center; }
+.eyebrow {
+  display: inline-block; text-transform: uppercase; letter-spacing: .09em;
+  font-size: .76rem; font-weight: 600; color: var(--accent);
+  margin: 0 0 18px; padding-bottom: 8px; border-bottom: 2px solid var(--accent);
+}
+h1 { font-size: clamp(2.2rem, 4.6vw, 3.3rem); line-height: 1.1; margin: 0 0 20px; letter-spacing: -.025em; color: var(--accent); }
+.wordmark { white-space: nowrap; }
+.lead { font-size: 1.12rem; margin: 0 0 14px; max-width: 34em; color: #374151; }
+.porte { margin: 0 0 30px; color: var(--muted); }
+.porte strong { color: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Portraits */
+.portrait { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--accent-soft); aspect-ratio: 4 / 5; border: 1px solid var(--line); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait.no-img { display: grid; place-items: center; border: 1px dashed #c3c8e6; }
+.portrait.no-img::after { content: "Portrait à ajouter"; font-size: .88rem; color: var(--muted); }
+
+/* Sections */
+.section { padding: 80px 0; }
+.section-alt { background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.kicker { text-transform: uppercase; letter-spacing: .09em; font-size: .76rem; font-weight: 600; color: var(--accent); margin: 0 0 12px; }
+h2 { font-size: clamp(1.55rem, 3vw, 2.05rem); line-height: 1.25; margin: 0 0 24px; letter-spacing: -.015em; color: var(--ink); }
+h3 { font-size: 1.08rem; line-height: 1.35; margin: 0 0 8px; color: var(--ink); }
+blockquote {
+  margin: 32px 0 0; padding: 6px 0 6px 22px; border-left: 3px solid var(--accent);
+  font-size: 1.1rem; font-weight: 500; color: var(--accent); line-height: 1.55;
+}
+
+/* Engagements */
+.engagements { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.card {
+  background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 26px 24px 28px;
+}
+.num { display: inline-block; font-size: .8rem; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 3px 10px; border-radius: 3px; margin-bottom: 16px; letter-spacing: .04em; }
+.plus { margin: 0 0 2px; font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
+.accroche { font-weight: 600; color: var(--accent); margin: 0 0 10px; font-size: .98rem; }
+.card p:last-child { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* Bloc "Nous voulons une Amicale" — clair, séparateurs fins */
+.band { background: var(--white); }
+.band h2 { margin-bottom: 32px; }
+.wants { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.wants li { border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: .98rem; }
+.wants span { display: block; font-size: 1.2rem; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+
+/* Candidate */
+.candidate-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+.slogan { font-weight: 600; color: var(--accent); font-size: 1.05rem; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+
+/* Appel à l'action — seul bloc sombre de la page */
+.cta { background: var(--accent); color: #fff; }
+.cta .lead { color: rgba(255,255,255,.9); }
+.cta h2 { color: #fff; }
+.cta-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 64px; align-items: center; }
+.excl { color: #fff; }
+.hashtag { font-weight: 600; opacity: .85; margin-top: 20px; letter-spacing: .02em; }
+.qr { margin: 0; text-align: center; }
+.qr img { background: #fff; padding: 14px; border-radius: var(--radius); margin: 0 auto 12px; width: 190px; height: 190px; }
+.qr figcaption { font-size: .86rem; opacity: .85; }
+
+/* Pied de page */
+.footer { padding: 36px 0; border-top: 1px solid var(--line); background: var(--white); }
+.footer p { margin: 0 0 4px; }
+.small { color: var(--muted); font-size: .88rem; }
+
+/* Adaptation */
+@media (max-width: 900px) {
+  .hero-grid, .candidate-grid, .cta-grid { grid-template-columns: 1fr; gap: 36px; }
+  .portrait-hero, .portrait-profil { max-width: 340px; }
+  .engagements { grid-template-columns: repeat(2, 1fr); }
+  .wants { grid-template-columns: repeat(2, 1fr); }
+  .qr { display: none; }
+}
+@media (max-width: 600px) {
+  .topbar nav a:not(.btn) { display: none; }
+  .hero { padding: 44px 0; }
+  .section { padding: 52px 0; }
+  .engagements, .wants { grid-template-columns: 1fr; }
+}
+
+/* Apparition discrète */
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+</style>
 </head>
 <body>
 
@@ -47,7 +200,7 @@
         </div>
       </div>
       <figure class="portrait portrait-hero">
-        <img src="/assets/img/portrait-hero.jpg" alt="Portrait de Mme Camara Diariatou Aidara" width="640" height="800" fetchpriority="high" onerror="this.parentNode.classList.add('no-img'); this.remove();">
+        <img src="assets/img/portrait-hero.jpg" alt="Portrait de Mme Camara Diariatou Aidara" width="640" height="800" fetchpriority="high" onerror="this.parentNode.classList.add('no-img'); this.remove();">
       </figure>
     </div>
   </section>
@@ -129,7 +282,7 @@
   <section id="candidate" class="section">
     <div class="wrap candidate-grid">
       <figure class="portrait portrait-profil">
-        <img src="/assets/img/portrait-profil.jpg" alt="Mme Camara Diariatou Aidara, de profil" width="640" height="800" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove();">
+        <img src="assets/img/portrait-profil.jpg" alt="Mme Camara Diariatou Aidara, de profil" width="640" height="800" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove();">
       </figure>
       <div>
         <p class="kicker">La candidate</p>
@@ -150,7 +303,7 @@
         <p class="hashtag">#Diary+</p>
       </div>
       <figure class="qr">
-        <img src="/assets/img/qr-whatsapp.svg" alt="QR code du groupe WhatsApp Diary+" width="200" height="200" loading="lazy">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iMjgwIiBjbGFzcz0ic2Vnbm8iPjxwYXRoIHRyYW5zZm9ybT0ic2NhbGUoOCkiIGNsYXNzPSJxcmxpbmUiIHN0cm9rZT0iIzJhMzE4MSIgZD0iTTEgMS41aDdtNCAwaDJtMSAwaDNtMSAwaDJtMiAwaDJtMiAwaDdtLTMzIDFoMW01IDBoMW0zIDBoMW00IDBoMW0yIDBoMW01IDBoMW0xIDBoMW01IDBoMW0tMzMgMWgxbTEgMGgzbTEgMGgxbTEgMGgybTQgMGgxbTEgMGgxbTQgMGgxbTEgMGgxbTIgMGgxbTEgMGgzbTEgMGgxbS0zMyAxaDFtMSAwaDNtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtNSAwaDFtMyAwaDJtMiAwaDFtMSAwaDNtMSAwaDFtLTMzIDFoMW0xIDBoM20xIDBoMW0xIDBoMW0yIDBoMm0xIDBoNG0yIDBoM20zIDBoMW0xIDBoM20xIDBoMW0tMzMgMWgxbTUgMGgxbTEgMGgxbTIgMGgxbTEgMGgxbTMgMGgxbTEgMGgxbTIgMGgxbTMgMGgxbTUgMGgxbS0zMyAxaDdtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDdtLTI1IDFoMW03IDBoMW0xIDBoNW0xIDBoMW0tMjUgMWgxbTEgMGg1bTMgMGgybTEgMGgybTIgMGgxbTEgMGgybTEgMGgxbTEgMGgxbTEgMGg1bS0zMSAxaDFtMiAwaDFtMyAwaDJtMSAwaDFtMiAwaDJtMSAwaDZtMSAwaDJtMSAwaDJtMSAwaDJtLTMwIDFoMm0yIDBoMm0yIDBoMW0zIDBoNW0zIDBoMm0xIDBoMW0zIDBoMW0xIDBoMm0tMzAgMWgzbTMgMGgybTEgMGgzbTMgMGgybTIgMGgxbTMgMGgxbTIgMGg0bS0zMSAxaDFtMiAwaDdtMSAwaDFtMSAwaDNtMyAwaDFtMyAwaDJtMiAwaDJtMiAwaDFtLTMzIDFoMm0xIDBoMm0yIDBoMm0xIDBoMm0xIDBoMW0xIDBoMW0yIDBoMW0zIDBoMm0yIDBoMW0yIDBoMW0xIDBoMm0tMzIgMWg0bTEgMGgybTEgMGgybTEgMGg3bTEgMGgybTMgMGgzbTEgMGgxbTEgMGgxbS0zMiAxaDJtMyAwaDFtMiAwaDFtMSAwaDRtMSAwaDFtNSAwaDFtMyAwaDZtLTMxIDFoMm0yIDBoM200IDBoMm0xIDBoNG0yIDBoMW0xIDBoMm0xIDBoMW0xIDBoM20yIDBoMW0tMzIgMWgzbTQgMGgzbTEgMGgxbTEgMGgzbTEgMGg0bTEgMGgxbTIgMGgybTEgMGg0bS0zMyAxaDNtMSAwaDFtMSAwaDNtMSAwaDJtMSAwaDNtMiAwaDFtMSAwaDFtMSAwaDFtNCAwaDJtMSAwaDJtLTMyIDFoMW0xIDBoMW0xIDBoMW0yIDBoMW0xIDBoMW0zIDBoMW0xIDBoMW01IDBoMm0xIDBoMW0xIDBoN20tMzMgMWgxbTIgMGgxbTEgMGg0bTMgMGgybTQgMGgxbTIgMGgybTEgMGgybTIgMGgybTEgMGgxbS0zMiAxaDFtMSAwaDNtMiAwaDFtMiAwaDFtMSAwaDJtMSAwaDNtMiAwaDJtMSAwaDFtMSAwaDFtMSAwaDFtMiAwaDFtMSAwaDFtLTMzIDFoMW01IDBoMW0xIDBoMW00IDBoMW0zIDBoMW0xIDBoMW0xIDBoMW0yIDBoMW0yIDBoM20xIDBoMW0tMzIgMWgxbTMgMGgxbTIgMGgxbTIgMGgxbTEgMGgxbTEgMGgxbTEgMGgxbTIgMGg0bTEgMGgzbTEgMGgzbS0zMSAxaDFtMSAwaDFtMSAwaDRtMyAwaDRtMiAwaDFtMSAwaDFtMiAwaDhtLTIyIDFoMW0xIDBoMW0xIDBoMm0xIDBoNm0xIDBoMW0xIDBoMW0zIDBoMW0xIDBoMm0tMzIgMWg3bTMgMGgxbTIgMGgxbTEgMGgzbTIgMGgxbTIgMGgybTEgMGgxbTEgMGgxbTEgMGgybS0zMiAxaDFtNSAwaDFtMSAwaDRtNCAwaDRtMSAwaDFtMSAwaDJtMyAwaDRtLTMyIDFoMW0xIDBoM20xIDBoMW0xIDBoMW0yIDBoMW0xIDBoMm0xIDBoMW00IDBoMW0yIDBoNm0yIDBoMW0tMzMgMWgxbTEgMGgzbTEgMGgxbTEgMGgxbTEgMGgzbTIgMGgxbTEgMGgybTIgMGgxbTIgMGgybTIgMGgxbTEgMGgzbS0zMyAxaDFtMSAwaDNtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDVtNCAwaDJtMyAwaDJtMSAwaDJtLTMxIDFoMW01IDBoMW0zIDBoMW0xIDBoMW0xIDBoMm01IDBoMW0yIDBoMW0xIDBoMW0xIDBoM20tMzEgMWg3bTEgMGgybTEgMGgxbTMgMGgxbTEgMGgybTEgMGgxbTEgMGg0bTEgMGgxbTMgMGgxIi8+PC9zdmc+Cg==" alt="QR code du groupe WhatsApp Diary+" width="200" height="200" loading="lazy">
         <figcaption>Sur ordinateur ? Scannez avec votre téléphone.</figcaption>
       </figure>
     </div>
@@ -165,6 +318,19 @@
   </div>
 </footer>
 
-<script src="/assets/js/main.js" defer></script>
+<script>
+(function () {
+  var items = document.querySelectorAll('.card, .wants li, .candidate-grid > *');
+  if (!('IntersectionObserver' in window)) return;
+  items.forEach(function (el) { el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+
+</script>
 </body>
 </html>
