@@ -202,6 +202,13 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
 .brand { display: inline-flex; align-items: flex-end; gap: .05em; font-family: "Gochi Hand", Caveat, cursive; font-weight: 400; font-size: 2.1rem; line-height: 1; letter-spacing: 0; color: var(--accent); }
 .brand-plus { width: .58em; height: .58em; fill: var(--accent); stroke: var(--accent); margin-bottom: .1em; }
 
+/* Pied de page aux couleurs de la charte */
+.footer { padding: 44px 0; }
+.foot-title { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .45em; margin: 0 0 10px; font-size: clamp(1.25rem, 2.6vw, 1.7rem); font-weight: 800; line-height: 1.2; color: #1a1f5c; }
+.foot-logo { display: inline-flex; align-items: flex-end; gap: .05em; font-family: "Gochi Hand", Caveat, cursive; font-weight: 400; font-size: 1.6em; line-height: 1; color: var(--accent); }
+.foot-sep { color: var(--accent); }
+.foot-sub { margin: 0; font-size: 1.1rem; font-weight: 700; color: #111827; }
+
 /* Adaptation */
 @media (max-width: 900px) {
   .hero-grid, .candidate-grid, .cta-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -372,8 +379,8 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
 
 <footer class="footer">
   <div class="wrap">
-    <p><strong>Diary+</strong> · Amicale des Femmes de la DGID (AFDGID)</p>
-    <p class="small">Programme de Mme Camara Diariatou Aidara, candidate à la présidence.</p>
+    <p class="foot-title"><span class="foot-logo">Diary<svg class="brand-plus" viewBox="0 0 100 100" aria-hidden="true"><path d="M36 6h28v30h30v28H64v30H36V64H6V36h30z" stroke-linejoin="round" stroke-width="6"/></svg></span><span class="foot-sep">·</span>Amicale des Femmes de la DGID (AFDGID)</p>
+    <p class="foot-sub">Programme de Mme Camara Diariatou Aidara, candidate à la présidence.</p>
   </div>
 </footer>
 
