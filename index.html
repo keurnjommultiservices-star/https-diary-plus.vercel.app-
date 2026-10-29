@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Lato:wght@400;800&family=Inter:wght@400;500;600;700&display=swap">
   <style>
 :root {
   --accent: #2a3181;
@@ -171,6 +171,26 @@ blockquote {
 .footer p { margin: 0 0 4px; }
 .small { color: var(--muted); font-size: .88rem; }
 
+/* Héros — fond bleu à rayures diagonales, titre en trois lignes */
+.hero {
+  background-color: #2a3181;
+  background-image: repeating-linear-gradient(135deg, rgba(0,0,0,0) 0 90px, rgba(14,18,78,.3) 90px 180px);
+  color: #fff; border-bottom: 0; padding: 80px 0;
+}
+.hero .eyebrow { color: #fff; border-bottom-color: rgba(255,255,255,.6); }
+.hero .lead { color: rgba(255,255,255,.92); }
+.hero .porte { color: rgba(255,255,255,.8); }
+.hero .porte strong { color: #fff; }
+.hero .btn-outline { color: #fff; border-color: rgba(255,255,255,.7); }
+.hero .btn-outline:hover { background: rgba(255,255,255,.12); }
+h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
+.t-le { display: block; font-family: Lato, Inter, sans-serif; font-weight: 400; font-size: clamp(2.4rem, 5.5vw, 3.6rem); line-height: 1; }
+.t-prog { display: block; font-family: Lato, Inter, sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(2.5rem, 6vw, 4.3rem); line-height: 1.05; letter-spacing: .01em; }
+.t-diary { display: inline-flex; align-items: flex-end; gap: .06em; font-family: "Gochi Hand", Caveat, cursive; font-weight: 400; font-size: clamp(4.2rem, 10.5vw, 7.2rem); line-height: .95; }
+.t-plus { width: .6em; height: .6em; fill: #fff; stroke: #fff; margin-bottom: .08em; }
+.portrait-hero { aspect-ratio: 5 / 6; border-radius: 14px; border: 1px solid rgba(255,255,255,.28); background: #232970; box-shadow: 0 28px 50px -22px rgba(0,0,0,.55); }
+.portrait-hero.no-img::after { color: rgba(255,255,255,.75); }
+
 /* Adaptation */
 @media (max-width: 900px) {
   .hero-grid, .candidate-grid, .cta-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -214,7 +234,11 @@ blockquote {
     <div class="wrap hero-grid">
       <div class="hero-text">
         <p class="eyebrow">Présidence · Amicale des Femmes de la DGID</p>
-        <h1>Le programme <span class="wordmark">Diary<span>+</span></span></h1>
+        <h1 class="title" aria-label="Le programme Diary+">
+          <span class="t-le" aria-hidden="true">Le</span>
+          <span class="t-prog" aria-hidden="true">Programme</span>
+          <span class="t-diary" aria-hidden="true">Diary<svg class="t-plus" viewBox="0 0 100 100"><path d="M36 6h28v30h30v28H64v30H36V64H6V36h30z" stroke-linejoin="round" stroke-width="6"/></svg></span>
+        </h1>
         <p class="lead">Une nouvelle dynamique collective, fondée sur l’écoute, l’action sociale, l’épanouissement professionnel, l’innovation et la transparence.</p>
         <p class="porte">Porté par <strong>Mme Camara Diariatou Aidara</strong>, candidate à la présidence de l’AFDGID.</p>
         <div class="actions">
