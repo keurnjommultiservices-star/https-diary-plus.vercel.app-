@@ -191,6 +191,10 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
 .portrait-hero { aspect-ratio: 5 / 6; border-radius: 14px; border: 1px solid rgba(255,255,255,.28); background: #232970; box-shadow: 0 28px 50px -22px rgba(0,0,0,.55); }
 .portrait-hero.no-img::after { color: rgba(255,255,255,.75); }
 
+/* Logo de l'en-tête : même écriture et même croix que le titre */
+.brand { display: inline-flex; align-items: flex-end; gap: .05em; font-family: "Gochi Hand", Caveat, cursive; font-weight: 400; font-size: 2.1rem; line-height: 1; letter-spacing: 0; color: var(--accent); }
+.brand-plus { width: .58em; height: .58em; fill: var(--accent); stroke: var(--accent); margin-bottom: .1em; }
+
 /* Adaptation */
 @media (max-width: 900px) {
   .hero-grid, .candidate-grid, .cta-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -219,7 +223,7 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
 <body>
 
 <header class="topbar">
-  <a class="brand" href="#top" aria-label="Diary+ — accueil">Diary<span>+</span></a>
+  <a class="brand" href="#top" aria-label="Diary+ — accueil">Diary<svg class="brand-plus" viewBox="0 0 100 100" aria-hidden="true"><path d="M36 6h28v30h30v28H64v30H36V64H6V36h30z" stroke-linejoin="round" stroke-width="6"/></svg></a>
   <nav aria-label="Navigation principale">
     <a href="#vision">Vision</a>
     <a href="#programme">Programme</a>
