@@ -240,18 +240,28 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
 .install, .ios-hint { margin: 16px 0 0; }
 .ios-hint { font-size: .92rem; color: #111827; font-weight: 600; }
 a, button { -webkit-tap-highlight-color: rgba(42, 49, 129, .15); }
+/* Barre d'onglets en bas (téléphone) */
+.tabbar {
+  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fff; border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -8px 20px -14px rgba(17, 24, 39, .3);
+}
+.tabbar a {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  min-height: 62px; padding: 9px 2px 8px; text-decoration: none;
+  color: #4b5563; font-size: .72rem; font-weight: 600; line-height: 1.1; text-align: center;
+}
+.tabbar svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tabbar a.active { color: var(--accent); }
+.tabbar a.active svg { stroke-width: 2.2; }
+.tabbar a.active::before { content: ""; position: absolute; top: 0; left: 22%; right: 22%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
 @media (max-width: 700px) {
-  .topbar { position: sticky; }
-  .menu-toggle { display: grid; }
-  .topbar nav {
-    display: none; position: absolute; top: 100%; left: 0; right: 0;
-    flex-direction: column; align-items: stretch; gap: 0;
-    padding: 6px 24px 20px; background: #fff; border-bottom: 1px solid var(--line);
-    box-shadow: 0 16px 24px -18px rgba(17, 24, 39, .25);
-  }
-  .topbar nav.open { display: flex; }
-  .topbar nav a:not(.btn) { padding: 15px 0; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
-  .topbar nav a.btn { margin-top: 16px; text-align: center; padding: 14px 16px; font-size: 1rem; }
+  .menu-toggle { display: none; }
+  .topbar nav a:not(.btn) { display: none; }
+  .tabbar { display: grid; }
+  body { padding-bottom: calc(62px + env(safe-area-inset-bottom)); }
   .btn { min-height: 46px; }
   .actions .btn { flex: 1 1 100%; text-align: center; }
   .t-diary { overflow: visible; }
@@ -271,9 +281,6 @@ a, button { -webkit-tap-highlight-color: rgba(42, 49, 129, .15); }
 
 <header class="topbar">
   <a class="brand" href="#top" aria-label="Diary+ — accueil">Diary<svg class="brand-plus" viewBox="0 0 100 100" aria-hidden="true"><path d="M36 6h28v30h30v28H64v30H36V64H6V36h30z" stroke-linejoin="round" stroke-width="6"/></svg></a>
-  <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-  </button>
   <nav id="main-nav" aria-label="Navigation principale">
     <a href="#top">Accueil</a>
     <a href="#vision">Vision</a>
@@ -422,6 +429,25 @@ a, button { -webkit-tap-highlight-color: rgba(42, 49, 129, .15); }
   </div>
 </footer>
 
+<nav class="tabbar" id="tabbar" aria-label="Navigation mobile">
+  <a href="#top" data-target="top" aria-current="page">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+    <span>Accueil</span>
+  </a>
+  <a href="#vision" data-target="vision">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+    <span>Vision</span>
+  </a>
+  <a href="#programme" data-target="programme">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+    <span>Programme</span>
+  </a>
+  <a href="#candidate" data-target="candidate">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M6.2 19a6 6 0 0 1 11.6 0"/></svg>
+    <span>La candidate</span>
+  </a>
+</nav>
+
 <script>
 (function () {
   var items = document.querySelectorAll('.wants li, .candidate-grid > *');
@@ -482,6 +508,47 @@ a, button { -webkit-tap-highlight-color: rgba(42, 49, 129, .15); }
   window.addEventListener('appinstalled', function () { if (box) box.hidden = true; });
   var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   if (isIOS && !standalone && hint) hint.hidden = false;
+})();
+
+(function () {
+  // Barre d'onglets du bas : onglet actif selon la section visible
+  var tabbar = document.getElementById('tabbar');
+  if (!tabbar) return;
+  var links = Array.prototype.slice.call(tabbar.querySelectorAll('a'));
+  var sections = {
+    top: document.querySelector('.hero'),
+    vision: document.getElementById('vision'),
+    programme: document.getElementById('programme'),
+    candidate: document.getElementById('candidate')
+  };
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var line = window.innerHeight * 0.4;
+    var current = 'top';
+    Object.keys(sections).forEach(function (k) {
+      var el = sections[k];
+      if (el && el.getBoundingClientRect().top <= line) current = k;
+    });
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 4) current = 'candidate';
+    links.forEach(function (a) {
+      var on = a.getAttribute('data-target') === current;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  tabbar.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if (a && a.getAttribute('data-target') === 'top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+  update();
 })();
 
 </script>
