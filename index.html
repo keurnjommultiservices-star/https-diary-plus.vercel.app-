@@ -116,7 +116,29 @@ blockquote {
   background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--accent);
   border-radius: var(--radius); padding: 26px 24px 28px;
 }
-.num { display: inline-block; font-size: .8rem; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 3px 10px; border-radius: 3px; margin-bottom: 16px; letter-spacing: .04em; }
+.card {
+  position: relative;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -12px rgba(42, 49, 129, .28);
+  border-color: #c9cdee;
+}
+.card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.icon {
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 12px;
+  background: var(--accent-soft); color: var(--accent);
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+.icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.card:hover .icon, .card:focus-within .icon { background: var(--accent); color: #fff; transform: rotate(-4deg) scale(1.06); }
+.num { font-size: 1.9rem; font-weight: 700; color: var(--accent); opacity: .16; line-height: 1; letter-spacing: -.02em; transition: opacity .25s ease; }
+.card:hover .num { opacity: .4; }
+@media (prefers-reduced-motion: reduce) {
+  .card, .icon, .num { transition: none; }
+  .card:hover, .card:focus-within, .card:hover .icon { transform: none; }
+}
 .plus { margin: 0 0 2px; font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
 .accroche { font-weight: 600; color: var(--accent); margin: 0 0 10px; font-size: .98rem; }
 .card p:last-child { margin: 0; color: var(--muted); font-size: .95rem; }
@@ -222,42 +244,42 @@ blockquote {
 
       <ol class="engagements">
         <li class="card">
-          <span class="num">01</span>
+          <div class="card-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><span class="num">01</span></div>
           <p class="plus">+ de</p>
           <h3>Leadership &amp; d’épanouissement professionnel</h3>
           <p class="accroche">Créer des espaces de progression et de transmission.</p>
           <p>Programmes de mentorat intergénérationnel, ateliers de développement personnel, partage d’expériences, programme d’accompagnement des nouvelles et rencontres autour du leadership.</p>
         </li>
         <li class="card">
-          <span class="num">02</span>
+          <div class="card-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span class="num">02</span></div>
           <p class="plus">+ de</p>
           <h3>Solidarité &amp; d’entraide</h3>
           <p class="accroche">Placer les membres au cœur de l’Amicale.</p>
           <p>Développer des mécanismes d’entraide, un dispositif d’écoute, un accompagnement lors des événements familiaux difficiles et des initiatives adaptées aux besoins réels des femmes.</p>
         </li>
         <li class="card">
-          <span class="num">03</span>
+          <div class="card-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 12l3-3 3 2 4-4"/></svg></span><span class="num">03</span></div>
           <p class="plus">+ de</p>
           <h3>Digitalisation &amp; d’innovation</h3>
           <p class="accroche">Passer d’une gestion obsolète à une organisation structurée.</p>
           <p>Mettre en place une plateforme numérique des membres, une gestion centralisée des activités et des ressources, des outils de communication interne et des tableaux de bord.</p>
         </li>
         <li class="card">
-          <span class="num">04</span>
+          <div class="card-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="num">04</span></div>
           <p class="plus">+ de</p>
           <h3>Cohésion &amp; de rayonnement</h3>
           <p class="accroche">Renforcer le sentiment d’appartenance.</p>
           <p>Des activités fédératrices, une meilleure circulation de l’information, la valorisation des compétences des membres et des initiatives qui rapprochent les différentes générations et catégories professionnelles.</p>
         </li>
         <li class="card">
-          <span class="num">05</span>
+          <div class="card-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.5" cy="12" r="6"/><circle cx="15.5" cy="12" r="6"/></svg></span><span class="num">05</span></div>
           <p class="plus">+ de</p>
           <h3>Partenariats &amp; d’opportunités</h3>
           <p class="accroche">Élargir les ressources et les possibilités d’action.</p>
           <p>Développer des partenariats conformes aux règles applicables avec des structures de formation, des acteurs sociaux et des organismes susceptibles d’apporter des compétences ou des services utiles aux membres.</p>
         </li>
         <li class="card">
-          <span class="num">06</span>
+          <div class="card-head"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="num">06</span></div>
           <p class="plus">+ de</p>
           <h3>Bonne gouvernance &amp; de transparence</h3>
           <p class="accroche">Renforcer la confiance par des règles et des résultats vérifiables.</p>
@@ -320,7 +342,7 @@ blockquote {
 
 <script>
 (function () {
-  var items = document.querySelectorAll('.card, .wants li, .candidate-grid > *');
+  var items = document.querySelectorAll('.wants li, .candidate-grid > *');
   if (!('IntersectionObserver' in window)) return;
   items.forEach(function (el) { el.classList.add('reveal'); });
   var io = new IntersectionObserver(function (entries) {
