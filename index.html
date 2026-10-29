@@ -6,6 +6,14 @@
   <title>Le programme Diary+ · Amicale des Femmes de la DGID</title>
   <meta name="description" content="Le programme Diary+ porté par Mme Camara Diariatou Aidara pour la présidence de l’Amicale des Femmes de la DGID : leadership, solidarité, digitalisation, cohésion, partenariats et bonne gouvernance.">
   <meta name="theme-color" content="#2a3181">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Diary+">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
   <link rel="canonical" href="https://diary-plus.netlify.app/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://diary-plus.netlify.app/">
@@ -218,10 +226,35 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
   .qr { display: none; }
 }
 @media (max-width: 600px) {
-  .topbar nav a:not(.btn) { display: none; }
   .hero { padding: 44px 0; }
   .section { padding: 52px 0; }
   .engagements, .wants { grid-template-columns: 1fr; }
+}
+
+/* Mobile : menu déroulant, zones tactiles, encoches iPhone */
+[hidden] { display: none !important; }
+.menu-toggle { display: none; width: 46px; height: 46px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--accent); cursor: pointer; place-items: center; -webkit-tap-highlight-color: transparent; }
+.menu-toggle svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.topbar { padding-top: max(14px, env(safe-area-inset-top)); }
+.footer { padding-bottom: max(44px, calc(env(safe-area-inset-bottom) + 24px)); }
+.install, .ios-hint { margin: 16px 0 0; }
+.ios-hint { font-size: .92rem; color: #111827; font-weight: 600; }
+a, button { -webkit-tap-highlight-color: rgba(42, 49, 129, .15); }
+@media (max-width: 700px) {
+  .topbar { position: sticky; }
+  .menu-toggle { display: grid; }
+  .topbar nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 6px 24px 20px; background: #fff; border-bottom: 1px solid var(--line);
+    box-shadow: 0 16px 24px -18px rgba(17, 24, 39, .25);
+  }
+  .topbar nav.open { display: flex; }
+  .topbar nav a:not(.btn) { padding: 15px 0; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+  .topbar nav a.btn { margin-top: 16px; text-align: center; padding: 14px 16px; font-size: 1rem; }
+  .btn { min-height: 46px; }
+  .actions .btn { flex: 1 1 100%; text-align: center; }
+  .t-diary { overflow: visible; }
 }
 
 /* Apparition discrète */
@@ -238,7 +271,10 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
 
 <header class="topbar">
   <a class="brand" href="#top" aria-label="Diary+ — accueil">Diary<svg class="brand-plus" viewBox="0 0 100 100" aria-hidden="true"><path d="M36 6h28v30h30v28H64v30H36V64H6V36h30z" stroke-linejoin="round" stroke-width="6"/></svg></a>
-  <nav aria-label="Navigation principale">
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav id="main-nav" aria-label="Navigation principale">
     <a href="#top">Accueil</a>
     <a href="#vision">Vision</a>
     <a href="#programme">Programme</a>
@@ -381,6 +417,8 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
   <div class="wrap">
     <p class="foot-title"><span class="foot-logo">Diary<svg class="brand-plus" viewBox="0 0 100 100" aria-hidden="true"><path d="M36 6h28v30h30v28H64v30H36V64H6V36h30z" stroke-linejoin="round" stroke-width="6"/></svg></span><span class="foot-sep">·</span>Amicale des Femmes de la DGID (AFDGID)</p>
     <p class="foot-sub">Programme de Mme Camara Diariatou Aidara, candidate à la présidence.</p>
+    <p class="install" id="install-box" hidden><button class="btn btn-small" id="install-btn" type="button">Installer l’application</button></p>
+    <p class="ios-hint" id="ios-hint" hidden>Sur iPhone : touchez le bouton Partager, puis « Sur l’écran d’accueil ».</p>
   </div>
 </footer>
 
@@ -395,6 +433,55 @@ h1.title { margin: 0 0 26px; line-height: 1; color: #fff; letter-spacing: 0; }
     });
   }, { threshold: 0.12 });
   items.forEach(function (el) { io.observe(el); });
+})();
+
+(function () {
+  // Menu mobile
+  var toggle = document.getElementById('menu-toggle');
+  var nav = document.getElementById('main-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Ouvrir le menu');
+      }
+    });
+  }
+
+  // Hors ligne (nécessite https ou localhost)
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+
+  // Installation : bouton sur Android/Chrome, consigne sur iPhone/iPad
+  var box = document.getElementById('install-box');
+  var btn = document.getElementById('install-btn');
+  var hint = document.getElementById('ios-hint');
+  var deferred = null;
+  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferred = e;
+    if (box && !standalone) box.hidden = false;
+  });
+  if (btn) {
+    btn.addEventListener('click', function () {
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () { deferred = null; if (box) box.hidden = true; });
+    });
+  }
+  window.addEventListener('appinstalled', function () { if (box) box.hidden = true; });
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (isIOS && !standalone && hint) hint.hidden = false;
 })();
 
 </script>
